@@ -25,6 +25,4 @@ def imprimirCombi(cadena, tam,k):
 
 
 imprimirCombi(cadena,0,k)
-
-
 file.write("}")
