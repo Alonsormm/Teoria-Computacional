@@ -1,0 +1,12 @@
+Cadena: 10011011000
+Por 1 Se paso de: q1 a: q1
+Por 0 Se paso de: q1 a: q2
+Por 0 Se paso de: q2 a: q2
+Por 1 Se paso de: q2 a: q3
+Por 1 Se paso de: q3 a: q1
+Por 0 Se paso de: q1 a: q2
+Por 1 Se paso de: q2 a: q3
+Por 1 Se paso de: q3 a: q1
+Por 0 Se paso de: q1 a: q2
+Por 0 Se paso de: q2 a: q2
+Por 0 Se paso de: q2 a: q2

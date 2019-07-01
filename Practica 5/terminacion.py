@@ -3,15 +3,15 @@ from DFA import FiniteAutomata
 
 # Automata de terminacion
 q = 3
-sigma = [0, 1]
-q_0 = ["q1"]
+sigma = ["0", "1"]
+q_0 = "q1"
 F = ["q3"]
 delta = {
-    "q1": ["q2", "q1"],
-    "q2": ["q2", "q3"],
-    "q3": ["q2", "q1"]
+    "q1": {"0":"q2", "1":"q1"},
+    "q2": {"0":"q2", "1":"q3"},
+    "q3": {"0":"q2", "1":"q1"}
 }
-F_A = FiniteAutomata(q, sigma, delta, q_0, F)
+F_A = FiniteAutomata(q, sigma, delta, q_0, F, True)
 
 print("1.-Ingresar cadena\n2.-Cadena aleatoria")
 
