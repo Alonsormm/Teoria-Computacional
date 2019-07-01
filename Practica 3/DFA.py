@@ -1,3 +1,5 @@
+#Automata mejorado
+
 from graphviz import Digraph
 
 class FiniteAutomata(object):
@@ -14,18 +16,20 @@ class FiniteAutomata(object):
             F:  Estados de aceptacion (Set)
         """
         Q_list = []
-        delta = {}
+        self.delta = {}
         for i in range(num_Q):
             Q_list.append("q"+str(i+1))
-            delta["q"+str(i+1)] = None
-        
-        self.Q = (Q_list)
-        self.sigma = (sigma)
+
+
+        self.Q = Q_list
+        self.sigma = sigma
         self.delta = delt
+        self.completar_diccionario()
+        print(self.delta)
+
         self.q_0 = q_0
         self.F = F
         self.estado_actual = q_0
-        self.archivo = open("datos.txt", "w")
         
     def get_estado_actual (self):
         return self.estado_actual
@@ -33,21 +37,29 @@ class FiniteAutomata(object):
     def get_estado_inicial(self):
         return self.q_0
     
+    def completar_diccionario(self):
+        for i in self.delta.keys():
+            for j in self.sigma:
+                if not j in self.delta[i].keys():
+                    self.delta[i][j] = None
+
+    
 
     def prueba(self, cadena):
         for i in (cadena):
-            self.archivo.write(i + '\n')            
-            siguiente_estado = self.delta[self.estado_actual[0]][int(i)]
-            self.archivo.write("Paso de " + self.estado_actual[0] + " a " + siguiente_estado + '\n') 
-            self.estado_actual = [siguiente_estado]
+            siguiente_estado = self.delta[self.estado_actual][i]
+
+            #print("Por " + i + " Se paso de: " + self.estado_actual + " a: " + siguiente_estado)
+
+            self.estado_actual = siguiente_estado
             
-            if self.estado_actual[0] == None:
+            if self.estado_actual == None:
                 self.estado_actual = self.get_estado_inicial()
                 return False
             else:
                 None
             
-        if self.estado_actual[0] in self.F :
+        if self.estado_actual in self.F :
             self.estado_actual = self.get_estado_inicial()
             return True
         else:
@@ -58,7 +70,7 @@ class FiniteAutomata(object):
     def drawn(self):
         
 
-        f = Digraph('finite_state_machine', filename='fsm.gv')
+        f = Digraph('finite_state_machine', filename='fsm.gv', format='png')
         f.attr(rankdir='LR', size='8,5')
         
         f.attr('node', shape='doublecircle')
@@ -68,43 +80,50 @@ class FiniteAutomata(object):
             
         f.attr('node', shape='circle')
         
-        for i in self.q_0:
-            f.node(i)
+        f.node(self.q_0)
 
-
-            
-        f.attr('node', shape='circle')
+        for key in self.delta.keys():
+            f.node(key)
         
-        for key, value in self.delta.items():
-            #print("Evaluando cada par key-value")
-            #print(key)
-            #print(value)
-            k = list(self.sigma)
-            
-            for j in self.delta.keys():
-                n=0
-                memory = []                
-                for i in value:
-                    if i == j:
-                        memory.append(k[n])
-                        #print("Memoria " + str(memory))
-                    n+=1
-                    a = str(memory)[1:-1]
+        '''
+        for estado, conexiones in self.delta.items():
+            for nombre, conex in conexiones.items():
+                if conex != None:
+                    f.edge(estado,conex,nombre)'''
                 
-                if len(a) != 0 and i != None:
-                    f.edge(key , j, label = a)
-                
-#                if i != None:
-#                    f.edge(key, i , label=str(k[m]))
-#                m +=1
+        for estado, conexiones in self.delta.items():
+            contados = []
+            for nombre, conex in conexiones.items():
+                count = 0
+                repetidos = []
+                if conex in contados or conex == None:
+                    continue
+                for nombreTemp, conexTemp in conexiones.items():
+                    if nombreTemp in repetidos:
+                        continue
+                    if conex == conexTemp:
+                        count+=1
+                        repetidos.append(nombreTemp)
+                contados.append(conex)
+                if len(repetidos) == 1:
+                    f.edge(estado,conex,nombre)                                        
+                else:
+                    cadena = ""
+                    for i in repetidos:
+                        cadena +=  (i+",")
+                    cadena = cadena[:-1]
+                    f.edge(estado,conex,cadena)
         
         f.attr('node', style='filled')
         f.attr('node', color='white')
         f.edge('',"q1")
         
         f.view()
-        
         return None
+
+
+        
+        
         
     
         
