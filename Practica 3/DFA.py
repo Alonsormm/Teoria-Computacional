@@ -6,7 +6,7 @@ class FiniteAutomata(object):
     
     "Clase que representa al automata finito"
     
-    def __init__(self, num_Q, sigma, delt, q_0, F):
+    def __init__(self, num_Q, sigma, delt, q_0, F,guardarPasos = False):
         
         """
             Q: Conjunto finito llamado "de estados" #Numero de estados (Int)
@@ -25,11 +25,13 @@ class FiniteAutomata(object):
         self.sigma = sigma
         self.delta = delt
         self.completar_diccionario()
-        print(self.delta)
 
         self.q_0 = q_0
         self.F = F
         self.estado_actual = q_0
+        self.guardarPasos = guardarPasos
+        if self.guardarPasos:
+            self.archivo = open("pasos.txt", "w")
         
     def get_estado_actual (self):
         return self.estado_actual
@@ -46,10 +48,15 @@ class FiniteAutomata(object):
     
 
     def prueba(self, cadena):
+
+        if self.guardarPasos:
+            self.archivo.write("Cadena: " + cadena + "\n") 
+
         for i in (cadena):
             siguiente_estado = self.delta[self.estado_actual][i]
 
-            #print("Por " + i + " Se paso de: " + self.estado_actual + " a: " + siguiente_estado)
+            if self.guardarPasos:
+                self.archivo.write("Por " + i + " Se paso de: " + self.estado_actual + " a: " + siguiente_estado + '\n')
 
             self.estado_actual = siguiente_estado
             
