@@ -4,7 +4,6 @@ digraph finite_state_machine {
 	q1
 	node [shape=circle]
 	q1
-	q1
 	q2
 	q3
 	q4
