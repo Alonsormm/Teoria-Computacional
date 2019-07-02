@@ -123,4 +123,4 @@ class NDFA(object):
     f.attr('node', style='filled')
     f.attr('node', color='white')
     f.edge('', "q1")
-    f.view()
+    #f.view()
