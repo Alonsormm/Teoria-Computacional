@@ -9,7 +9,7 @@
 #### Tabla de practicas 
 | No. Practica | Titulo | Estado |
 | ------ | ------ | ----- |
-|1|Combinaciones binarias de tamaño n, de tamaño 0 a n, y graficarla|Sin Terminar|
+|1|Combinaciones binarias de tamaño n, de tamaño 0 a n, y graficar el numero de 1's por cadena|Sin Terminar|
 |2|Generador de números primos|Terminada|
 |3|Paridad binaria|Terminada|
 |4|Protocolo| Terminada|
