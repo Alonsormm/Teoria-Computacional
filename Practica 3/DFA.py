@@ -69,8 +69,8 @@ class FiniteAutomata(object):
             siguiente_estado = self.delta[self.estado_actual][i]
 
             if self.guardarPasos:
-                self.archivo.write("Por " + i + " Se paso de: " +
-                                   self.estado_actual + " a: " + siguiente_estado + '\n')
+                self.archivo.write(i + " " +
+                                   self.estado_actual + " -> " + siguiente_estado + '\n')
 
             self.estado_actual = siguiente_estado
 
@@ -84,9 +84,11 @@ class FiniteAutomata(object):
         '''
         if self.estado_actual in self.F:
             self.estado_actual = self.get_estado_inicial()
+            self.archivo.write("El automata SI acepta la cadena\n")
             return True
         else:
             self.estado_actual = self.get_estado_inicial()
+            self.archivo.write("El automata NO acepta la cadena\n")
             return False
 
     #Genera una imagen png con un diagrama que representa el automata

@@ -36,7 +36,7 @@ with open("datos_3.txt") as f:
       unos.append(cadTemp.count("1"))
       cadTemp = ""
       bits = 0
-plt.plot(unos, marker='o')
+plt.scatter(np.array(range(len(unos))), unos)
 unos.clear()
 plt.show()
 

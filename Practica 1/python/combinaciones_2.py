@@ -25,7 +25,7 @@ for i in range(n+1):
 file.write("}")
 file.close()
 print("Cadena generada")
-plt.plot(unos, marker='o')
+plt.scatter(np.array(range(len(unos))), unos)
 unos.clear()
 plt.show()
 

@@ -1,6 +1,4 @@
 import matplotlib.pyplot as plt
-import plotly.express as px
-import pandas as pd
 import numpy as np
 n = int(input("Ingrese una n: "))
 
@@ -20,10 +18,11 @@ def guardarCadenas(cadena, tam,n):
   cadena_1 = cadena+'1'
   guardarCadenas(cadena_0,tam+1,n)
   guardarCadenas(cadena_1,tam+1,n)
+  
 guardarCadenas(cadena,0,n)
 file.write("}")
 print("Cadena generada")
-plt.plot(unos, marker='o')
+plt.scatter(np.array(range(len(unos))), unos)
 unos.clear()
 plt.show()
 

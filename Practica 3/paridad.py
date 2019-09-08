@@ -1,8 +1,7 @@
-import random
 from DFA import FiniteAutomata
 import string
-
-
+import random
+import progressbar
 #Automata de paridad
 q = 4
 sigma = ["0", "1"]
@@ -14,19 +13,28 @@ delta={
         "q3":{"0":"q4", "1":"q2"},
         "q4":{"0":"q3", "1":"q1"}
         }
-F_A = FiniteAutomata(q,sigma,delta,q_0,F)
+F_A = FiniteAutomata(q,sigma,delta,q_0,F,True)
 
-F_A.drawn()
+numCadenas = int(input("Ingrese el numero de cadenas que desea generar: "))
+tamCadenas = int(input("Ingrese el tamaño de las cadenas: "))
 
-print("1.-Ingresar cadena\n2.-Cadena aleatoria")
+while random.randint(0,1):
+  file = open("datos.txt", "w")
+  print("El protocolo inicio!")
+  print("Generando cadenas!")
+  for i in progressbar.progressbar(range(numCadenas)):
+    cadTemp = ""
+    for j in range(tamCadenas):
+      cadTemp += str(random.randint(0,1))
+    file.write(cadTemp+ "\n")
+  file.close()
+  print("Se generaron las cadenas!")
+  file = open("datos.txt", "r")
+  print("Probando las cadenas!")
+  for i in progressbar.progressbar(range(numCadenas)):
+      line = file.readline()
+      F_A.prueba(line[:-1])
+  print("Cadenas probadas!")
+  file.close()
 
-opc = input("Ingrese opcion deseada: ")
-
-if opc == '1':
-  cadena = input("Ingrese la cadena: ")
-else:
-  cadena = str(bin(random.randrange(10000))[2:])
-  print(cadena)
-
-
-print(F_A.prueba(cadena))
+print("Fin de los protocolos")

@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import plotly.express as px
 import pandas as pd
+import numpy as np
 n = int(input("Ingrese maximo: "))
 
 
@@ -17,7 +18,8 @@ for i in range(3,n+1):
     bina = str(bin(i)[2:])
     file.write(bina + '')
     unos.append(bina.count("1"))
-plt.plot(unos, marker='o')
+plt.scatter(np.array(range(len(unos))), unos)
+
 unos.clear()
 plt.show()
 file.write('}')

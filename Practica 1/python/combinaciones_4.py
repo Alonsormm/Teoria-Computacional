@@ -25,7 +25,7 @@ cadTemp = ""
 bits = 0
     
 print("Cadena generada")
-with open("datos_3.txt") as f:
+with open("datos_4.txt") as f:
   while True:
     c = f.read(1)
     if not c:
@@ -36,6 +36,6 @@ with open("datos_3.txt") as f:
       unos.append(cadTemp.count("1"))
       cadTemp = ""
       bits = 0
-plt.plot(unos, marker='o')
+plt.scatter(np.array(range(len(unos))), unos)
 unos.clear()
 plt.show()
