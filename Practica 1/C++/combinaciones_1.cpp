@@ -1,5 +1,4 @@
 #include<bits/stdc++.h>
-#include "gnuplot-iostream.h"
 using namespace std;
 
 void imprimirCombi(string cadena, int n, int tam, ofstream &myfile){

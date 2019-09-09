@@ -2,6 +2,7 @@ from DFA import FiniteAutomata
 import string
 import random
 import progressbar
+import time
 #Automata de paridad
 q = 4
 sigma = ["0", "1"]
@@ -36,5 +37,7 @@ while random.randint(0,1):
       F_A.prueba(line[:-1])
   print("Cadenas probadas!")
   file.close()
+  print("2s Timeout")
+  time.sleep(2)
 
 print("Fin de los protocolos")

@@ -4,8 +4,8 @@ using namespace std;
 
 void encontrarPrimos(int n){
   ofstream myfile;
-  myfile.open ("datos.txt");
-  myfile << '{';
+  myfile.open("datos.txt");
+  //myfile << '{';
   bool no_primo;
   for(int i = 3; i <= n ; i++){
     no_primo = false;
@@ -14,10 +14,10 @@ void encontrarPrimos(int n){
         no_primo = true;
     }
     if(!no_primo){
-      myfile << i << ',';
+      myfile << i << "\n";
     }
   }
-  myfile << '}';
+  //myfile << '}';
 }
 
 int main(){

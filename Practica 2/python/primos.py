@@ -4,22 +4,24 @@ import pandas as pd
 import numpy as np
 n = int(input("Ingrese maximo: "))
 
-
+x = 0
+prims = [0] * (n+1)
+nums = [0] * (n+1)
 file = open("datos.txt", "w")
-file.write('{')
 unos = []
-for i in range(3,n+1):
-  no_primo = False
-  for j in range(2,i):
-    if i % j == 0:
-      no_primo = True
-  if not no_primo:
-    print(i)
-    bina = str(bin(i)[2:])
-    file.write(bina + '')
-    unos.append(bina.count("1"))
-plt.scatter(np.array(range(len(unos))), unos)
+for i in range(2,n+1):
+  if nums[i] != 1 or i == 2:
+    prims[0] = i
+    cad = str(bin(i)[2:])
+    file.write(cad+"\n")
+    unos.append(cad.count("1"))
+    p = 2
+    while p*i <= n:
+      nums[p*i] = 1
+      p+=1
+    x+=1
 
+
+plt.scatter(np.array(range(len(unos))), unos)
 unos.clear()
 plt.show()
-file.write('}')
