@@ -222,5 +222,5 @@ delta={
 
 
 F_A = DFA.FiniteAutomata(q,sigma,delta,q_0,F, True)
-#F_A.drawn()
-F_A.prueba("do int case \nbreak; do{")
+F_A.drawn()
+#F_A.prueba("do int case \nbreak; do{")

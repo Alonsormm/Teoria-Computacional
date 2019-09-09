@@ -37,7 +37,7 @@ class FiniteAutomata(object):
         self.Q = Q_list
         self.sigma = sigma
         self.delta = delt
-        self.completar_diccionario()
+        #self.completar_diccionario()
 
         self.q_0 = q_0
         self.F = F
