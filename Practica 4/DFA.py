@@ -37,7 +37,77 @@ class FiniteAutomata(object):
         self.Q = Q_list
         self.sigma = sigma
         self.delta = delt
-        #self.completar_diccionario()
+        self.completar_diccionario()
+
+
+        self.nombreEstados = {
+            "q5":"auto",
+            "q10":"break",
+            "q14":"case",
+            "q17":"char",
+            "q21":"const",
+            "q26":"continue",
+            "q33":"default",
+            "q38":"double",
+            "q42":"else",
+            "q45":"enum",
+            "q50":"extern",
+            "q55":"float",
+            "q57":"for",
+            "q61":"goto",
+            "q63":"if",
+            "q65":"int",
+            "q69":"long",
+            "q77":"register",
+            "q81":"return",
+            "q86":"shor",
+            "q91":"signed",
+            "q95":"sizeof",
+            "q100":"static",
+            "q104":"struct",
+            "q109":"switch",
+            "q116":"typedef",
+            "q121":"union",
+            "q142":"unsigned",
+            "q15":"void",
+            "q131":"volatile",
+            "q136":"while",
+        }
+
+        self.apariciones = {
+            "auto":0,
+            "break":0,
+            "case":0,
+            "char":0,
+            "const":0,
+            "continue":0,
+            "default":0,
+            "double":0,
+            "else":0,
+            "enum":0,
+            "extern":0,
+            "float",
+            "for",
+            "goto",
+            "if",
+            "int",
+            "long",
+            "register",
+            "return",
+            "shor",
+            "signed",
+            "sizeof",
+            "q100":"static",
+            "q104":"struct",
+            "q109":"switch",
+            "q116":"typedef",
+            "q121":"union",
+            "q142":"unsigned",
+            "q15":"void",
+            "q131":"volatile",
+            "q136":"while",
+        }
+
 
         self.q_0 = q_0
         self.F = F
@@ -69,8 +139,13 @@ class FiniteAutomata(object):
     def prueba(self, cadena):
         if self.guardarPasos:
             self.archivo.write("Cadena: " + cadena + "\n")
-
+        indice = 0
+        renglon = 1
         for i in cadena:
+            if i == "\n":
+                renglon+=1
+                indice = 0
+            indice +=1
             # Busca en el diccionario delta que estado es al que tiene que ir
             siguiente_estado = self.delta[self.estado_actual][i]
 
@@ -79,7 +154,9 @@ class FiniteAutomata(object):
                                    self.estado_actual + " a: " + siguiente_estado + '\n')
 
             if siguiente_estado in self.F and self.estado_actual != "q0" and self.estado_actual != "q1":
-                print("Palabra reservada")
+                print("Palabra reservada: ", end="")
+                print(self.nombreEstados[self.estado_actual], end=" ")
+                print("en renglon "+ str(renglon))
 
             self.estado_actual = siguiente_estado
 
