@@ -1,6 +1,4 @@
 import matplotlib.pyplot as plt
-import plotly.express as px
-import pandas as pd
 import numpy as np
 n = int(input("Ingrese una n: "))
 
@@ -25,7 +23,9 @@ for i in range(n+1):
 file.write("}")
 file.close()
 print("Cadena generada")
-plt.scatter(np.array(range(len(unos))), unos)
+plt.scatter(np.array(range(len(unos))), unos,  s=10)
+plt.xlabel("Numero de Cadena")
+plt.ylabel("Numero de 1's")
 unos.clear()
 plt.show()
 

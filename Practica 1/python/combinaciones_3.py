@@ -1,6 +1,4 @@
 import matplotlib.pyplot as plt
-import plotly.express as px
-import pandas as pd
 import numpy as np
 n = int(input("Ingrese una n: "))
 
@@ -37,6 +35,8 @@ with open("datos_3.txt") as f:
       cadTemp = ""
       bits = 0
 plt.scatter(np.array(range(len(unos))), unos)
+plt.xlabel("Numero de Cadena")
+plt.ylabel("Numero de 1's")
 unos.clear()
 plt.show()
 

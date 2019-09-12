@@ -1,15 +1,15 @@
 import DFA
 import string
 
-q = 136
+q = 142
 sigma = list(string.printable)
 q_0 = "q1"
-#F = ["q5", "q10", "q14", "q17", "q21", "q26", "q33","q34", "q38"]
 F = ["q1"]
 delta={
-        #auto
         "q0":{" " : "q1","\n":"q1", "RDA":"q0"},
         "q1":{"a":"q2", "b":"q6", "c": "q11","d":"q27", "e": "q39","f": "q51", "g": "q58","i":"q62","l":"q66","r": "q70","s":"q82","t":"q110","u":"q117","v":"q122","w":"q132"," " : "q1","\n":"q1","RDA":"q0"},
+        
+        #auto        
         "q2":{"u":"q3", "RDA":"q0"},
         "q3":{"t":"q4", "RDA":"q0"},
         "q4":{"o":"q5", "RDA":"q0"},
@@ -32,7 +32,7 @@ delta={
         #char
         "q15":{"a":"q16", "RDA":"q0"},
         "q16":{"r":"q17", "RDA":"q0"},
-        "q17":{"RDA":"q0", " " : "q1"},
+        "q17":{"RDA":"q0", " " : "q1", "*":"q1"},
         
         #inicio con "con"
 
@@ -113,14 +113,14 @@ delta={
         "q63":{"RDA":"q0", " " : "q1", "{" : "q1"},
         #int
         "q64":{"t":"q65","RDA":"q0"},
-        "q65":{"RDA":"q0", " " : "q1"},
+        "q65":{"RDA":"q0", " " : "q1", "*":"q1"},
         
         #inicio con l
         #long
         "q66":{"o":"q67","RDA":"q0"},
         "q67":{"n":"q68","RDA":"q0"},
         "q68":{"g":"q69","RDA":"q0"},
-        "q69":{"RDA":"q0", " " : "q1"},
+        "q69":{"RDA":"q0", " " : "q1", "*":"q1"},
 
         #inicio con re
         "q70":{"e":"q71","RDA":"q0"},
@@ -145,7 +145,7 @@ delta={
         "q83":{"o":"q84","RDA":"q0"},
         "q84":{"r":"q85","RDA":"q0"},
         "q85":{"t":"q86","RDA":"q0"},
-        "q86":{"RDA":"q0", " " : "q1"},
+        "q86":{"RDA":"q0", " " : "q1", "*":"q1"},
         #inicio con si
         "q87":{"g":"q88","z": "q92","RDA":"q0"},
         #signed
@@ -197,6 +197,16 @@ delta={
         "q120":{"n":"q121","RDA":"q0"},
         "q121":{"RDA":"q0", " " : "q1"},
 
+        #unsigned
+
+        #unsigned
+        "q137":{"i":"q138","RDA":"q0"},        
+        "q138":{"g":"q139","RDA":"q0"},
+        "q139":{"n":"q140","RDA":"q0"},        
+        "q140":{"e":"q141","RDA":"q0"},        
+        "q141":{"d":"q142","RDA":"q0"},
+        "q142":{"RDA":"q0", " " : "q1"},
+
         #incio con v
         "q122":{"o":"q123","RDA":"q0"},
         #incio con vo
@@ -218,21 +228,15 @@ delta={
         "q135":{"e":"q136","RDA":"q0"},
         "q136":{"RDA":"q0", " " : "q1", "(":"q1"},
 
-        #unsigned
-        "q137":{"i":"q138","RDA":"q0"},        
-        "q138":{"g":"q139","RDA":"q0"},
-        "q139":{"n":"q140","RDA":"q0"},        
-        "q140":{"e":"q141","RDA":"q0"},        
-        "q141":{"d":"q142","RDA":"q0"},
-        "q142":{"RDA":"q0", " " : "q1"},
       }
 
 
 F_A = DFA.FiniteAutomata(q,sigma,delta,q_0,F, True)
-#F_A.drawn()
+F_A.drawn()
 file = open("holamundo.c", "r")
 cad = ""
 for i in file.readlines():
   cad += i
-print(cad)
 F_A.prueba(cad)
+print("Codigo analizado")
+

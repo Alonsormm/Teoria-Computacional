@@ -3,6 +3,7 @@ import string
 import random
 import progressbar
 import time
+
 #Automata de paridad
 q = 4
 sigma = ["0", "1"]
@@ -19,6 +20,7 @@ F_A = FiniteAutomata(q,sigma,delta,q_0,F,True)
 numCadenas = int(input("Ingrese el numero de cadenas que desea generar: "))
 tamCadenas = int(input("Ingrese el tamaño de las cadenas: "))
 
+
 while random.randint(0,1):
   file = open("datos.txt", "w")
   print("El protocolo inicio!")
@@ -31,10 +33,16 @@ while random.randint(0,1):
   file.close()
   print("Se generaron las cadenas!")
   file = open("datos.txt", "r")
+  fileAceptadas = open("cadenasAceptadas.txt", "a")
+  fileNoAceptadas = open("cadenasAceptadas.txt", "a")
+
   print("Probando las cadenas!")
   for i in progressbar.progressbar(range(numCadenas)):
       line = file.readline()
-      F_A.prueba(line[:-1])
+      if(F_A.prueba(line[:-1])):
+        fileAceptadas.write(line)
+      else:
+        fileNoAceptadas.write(line)
   print("Cadenas probadas!")
   file.close()
   print("2s Timeout")

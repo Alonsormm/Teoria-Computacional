@@ -22,7 +22,9 @@ def guardarCadenas(cadena, tam,n):
 guardarCadenas(cadena,0,n)
 file.write("}")
 print("Cadena generada")
-plt.scatter(np.array(range(len(unos))), unos)
+plt.scatter(np.array(range(len(unos))), unos, s=10)
+plt.xlabel("Numero de Cadena")
+plt.ylabel("Numero de 1's")
 unos.clear()
 plt.show()
 

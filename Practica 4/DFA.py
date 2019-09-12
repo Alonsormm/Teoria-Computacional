@@ -37,7 +37,6 @@ class FiniteAutomata(object):
         self.Q = Q_list
         self.sigma = sigma
         self.delta = delt
-        self.completar_diccionario()
 
 
         self.nombreEstados = {
@@ -69,7 +68,7 @@ class FiniteAutomata(object):
             "q116":"typedef",
             "q121":"union",
             "q142":"unsigned",
-            "q15":"void",
+            "q125":"void",
             "q131":"volatile",
             "q136":"while",
         }
@@ -86,26 +85,26 @@ class FiniteAutomata(object):
             "else":0,
             "enum":0,
             "extern":0,
-            "float",
-            "for",
-            "goto",
-            "if",
-            "int",
-            "long",
-            "register",
-            "return",
-            "shor",
-            "signed",
-            "sizeof",
-            "q100":"static",
-            "q104":"struct",
-            "q109":"switch",
-            "q116":"typedef",
-            "q121":"union",
-            "q142":"unsigned",
-            "q15":"void",
-            "q131":"volatile",
-            "q136":"while",
+            "float":0,
+            "for":0,
+            "goto":0,
+            "if":0,
+            "int":0,
+            "long":0,
+            "register":0,
+            "return":0,
+            "shor":0,
+            "signed":0,
+            "sizeof":0,
+            "static":0,
+            "struct":0,
+            "switch":0,
+            "typedef":0,
+            "union":0,
+            "unsigned":0,
+            "void":0,
+            "volatile":0,
+            "while":0,
         }
 
 
@@ -113,8 +112,10 @@ class FiniteAutomata(object):
         self.F = F
         self.estado_actual = q_0
         self.guardarPasos = guardarPasos
+        self.dictCompletado = False
         if self.guardarPasos:
             self.archivo = open("pasos.txt", "w")
+        self.palabrasReservadas = open("palabras.txt", "w")
 
     def get_estado_actual(self):
         return self.estado_actual
@@ -139,6 +140,10 @@ class FiniteAutomata(object):
     def prueba(self, cadena):
         if self.guardarPasos:
             self.archivo.write("Cadena: " + cadena + "\n")
+        if not self.dictCompletado:
+            self.completar_diccionario()
+        self.palabrasReservadas.write("Analizando el codigo: \n")
+        self.palabrasReservadas.write(cadena + "\n")
         indice = 0
         renglon = 1
         for i in cadena:
@@ -154,9 +159,12 @@ class FiniteAutomata(object):
                                    self.estado_actual + " a: " + siguiente_estado + '\n')
 
             if siguiente_estado in self.F and self.estado_actual != "q0" and self.estado_actual != "q1":
-                print("Palabra reservada: ", end="")
-                print(self.nombreEstados[self.estado_actual], end=" ")
-                print("en renglon "+ str(renglon))
+                self.apariciones[self.nombreEstados[self.estado_actual]] += 1
+                self.palabrasReservadas.write("Palabra reservada: ")
+                self.palabrasReservadas.write(self.nombreEstados[self.estado_actual])
+                self.palabrasReservadas.write(" en el renglon "+ str(renglon))
+                self.palabrasReservadas.write(" en el indice "+ str(indice-1-len(self.nombreEstados[self.estado_actual])) + "\n")
+
 
             self.estado_actual = siguiente_estado
 
@@ -165,6 +173,9 @@ class FiniteAutomata(object):
             if self.estado_actual == None:
                 self.estado_actual = self.get_estado_inicial()
                 return False
+        for i in self.apariciones.keys():
+            if self.apariciones[i] != 0:
+                self.palabrasReservadas.write("La palabra "+ i + " aparece " + str(self.apariciones[i]) + " veces\n")
         '''
             Si el estado actual despues de evaluar toda la cadena
             esta en la lista de estados finales retorna True
@@ -176,6 +187,8 @@ class FiniteAutomata(object):
         else:
             self.estado_actual = self.get_estado_inicial()
             return False
+        
+
 
     #Genera una imagen png con un diagrama que representa el automata
     def drawn(self):

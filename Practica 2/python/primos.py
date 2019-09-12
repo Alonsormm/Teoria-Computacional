@@ -1,6 +1,4 @@
 import matplotlib.pyplot as plt
-import plotly.express as px
-import pandas as pd
 import numpy as np
 n = int(input("Ingrese maximo: "))
 
@@ -13,7 +11,7 @@ for i in range(2,n+1):
   if nums[i] != 1 or i == 2:
     prims[0] = i
     cad = str(bin(i)[2:])
-    file.write(cad+"\n")
+    file.write(cad+" ")
     unos.append(cad.count("1"))
     p = 2
     while p*i <= n:
@@ -21,7 +19,9 @@ for i in range(2,n+1):
       p+=1
     x+=1
 
-
+file.close()
 plt.scatter(np.array(range(len(unos))), unos)
+plt.xlabel("Numero de Cadena")
+plt.ylabel("Numero de 1's")
 unos.clear()
 plt.show()

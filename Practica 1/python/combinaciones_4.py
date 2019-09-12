@@ -1,10 +1,8 @@
 import matplotlib.pyplot as plt
-import plotly.express as px
-import pandas as pd
 import numpy as np
 n = int(input("Ingrese una n: "))
 
-file = open("datos_3.txt", "w")
+file = open("datos_4.txt", "w")
 
 cadena = ''
 
