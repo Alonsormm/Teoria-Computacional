@@ -5,10 +5,6 @@ import chess
 import chess.svg
 from IPython.display import SVG, display
 
-def randomString(stringLength):
-    letters = ['r','b']
-    return ''.join(random.choice(letters) for i in range(stringLength))
-
 class NFA(object):
   def __init__(self, Q, sigma, delt, q_0, F):
     """
@@ -161,22 +157,35 @@ class NFA(object):
     f.view()
 
 
+print("Bienvenido al ajedrez!")
+print("Elija una opcion:\n1.-Desea generar cadenas aleatorias\n2.-Desea ingresar las cadenas")
+opc = input()
+if opc == "1":
+  elegir=False
+else:
+  elegir = True
 
 
-def generarCadena():
-  cad = ""
-  tam = random.randint(2,10)
-  for i in range(tam):
-    if random.randint(0,1):
-      cad+="r"
+def generarCadena(ingresar = False, automata = None, estado = None):
+  if not ingresar
+    cad = ""
+    tam = random.randint(2,10)
+    for i in range(tam):
+      if random.randint(0,1):
+        cad+="r"
+      else:
+        cad+="b"
+    cad+="b"
+    return cad
+  while 1:
+    cad = input("Ingresa tu cadena: ")
+    if automata.pruebaRecursiva(cad, estado):
+      automata.camino.clear()
+      return cad
     else:
-      cad+="b"
-  cad+="b"
-  return cad
+      print("Cadena no valida")
+      automata.camino.clear()
 
-
-cadenaBlanco=generarCadena()
-cadenaNegro=generarCadena()
 q = 9
 sigma = ["r", "b"]
 delta = {
@@ -193,21 +202,35 @@ delta = {
 q_0 = "q1"
 F = ["q9"]
 automata1 = NFA(q, sigma, delta, q_0, F)
-q_0 = "q9"
-F = ["q1"]
-automata2 = NFA(q, sigma, delta, q_0, F)
-while not(automata1.pruebaRecursiva(generarCadena(), automata1.q_0)):
-  #print("La cadena es rechazada, generando nueva cadena")
-  automata1.camino.clear()
+q_0N = "q9"
+F_N = ["q1"]
+automata2 = NFA(q, sigma, delta, q_0N, F_N)
+
+
+if elegir:
+  cadenaBlanco=generarCadena(True, automata1,automata1.q_0)
+  cadenaNegro=generarCadena(True, automata2, automata2.q_0)
+else:
   cadenaBlanco=generarCadena()
-automata1.camino.reverse()
+  cadenaNegro=generarCadena()
+
+def recalcularRuta(automata, estadoA, noTocar):
+  print("Recualculando Ruta...")
+  while 1:
+    automata.camino.clear()
+    if elegir:
+      nuevaRuta = generarCadena(True, automata, estado)
+      break
+    if automata.pruebaRecursiva(nuevaRuta, estadoA):
+      automata.camino.reverse()
+      if automata.camino[0] != noTocar:
+        print("La nueva ruta es: " + str(automata.camino))
+        return
+
+recalcularRuta(automata1, automata1.q_0, automata2.q_0)
 print("El camino que tomara el blanco es: "+ str(automata1.camino))
 
-while not(automata2.pruebaRecursiva(generarCadena(), automata2.q_0)):
-  #print("La cadena es rechazada, generando nueva cadena")
-  automata2.camino.clear()
-  cadenaNegro=generarCadena()
-automata2.camino.reverse()
+recalcularRuta(automata2, automata2.q_0, automata1.q_0)
 print("El camino que tomara el negro es: " + str(automata2.camino))
 
 casillas = {
@@ -228,17 +251,7 @@ board.set_piece_at(chess.C6, chess.Piece.from_symbol("k"))
 display(SVG(chess.svg.board(board=board)))
 
 #Vamos a jugar!!!!!!!!
-def recalcularRuta(automata, estadoA, noTocar):
-  print("Recualculando Ruta...")
-  #print(estadoA)
-  while 1:
-    automata.camino.clear()
-    nuevaRuta = generarCadena()
-    if automata.pruebaRecursiva(nuevaRuta, estadoA):
-      automata.camino.reverse()
-      if automata.camino[0] != noTocar:
-        print("La nueva ruta es: " + str(automata.camino))
-        return
+
 turno = 0
 i=0 #indice de la lista del automata1
 j = 0 #indice de la lista del automata2
