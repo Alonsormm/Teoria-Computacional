@@ -8,7 +8,7 @@ delta = {
     "q2" : {"0": None, "1": None},
 }
 q_0 = "q0"
-F = ["q1"]
+F = ["q2"]
 
 automata = NFA(q, sigma, delta, q_0, F)
 automata.drawn()
