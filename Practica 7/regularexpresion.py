@@ -138,7 +138,7 @@ class RegEx(object):
 
 
 
-ExpresionRegular = input()
+ExpresionRegular = input("Introduce la expresion regular de la cual quieras generar cadenas?")
 reg = RegEx(ExpresionRegular)
 arbol = Nodo(None)
 arbol = expressionToTree(arbol, reg.regex)

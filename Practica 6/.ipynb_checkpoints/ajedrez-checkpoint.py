@@ -167,7 +167,7 @@ else:
 
 
 def generarCadena(ingresar = False, automata = None, estado = None):
-  if not ingresar:
+  if not ingresar
     cad = ""
     tam = random.randint(2,10)
     for i in range(tam):
@@ -180,8 +180,7 @@ def generarCadena(ingresar = False, automata = None, estado = None):
   while 1:
     cad = input("Ingresa tu cadena: ")
     if automata.pruebaRecursiva(cad, estado):
-      #automata.camino.clear()
-      automata.camino.reverse()
+      automata.camino.clear()
       return cad
     else:
       print("Cadena no valida")
@@ -208,29 +207,29 @@ F_N = ["q1"]
 automata2 = NFA(q, sigma, delta, q_0N, F_N)
 
 
-'''if elegir:
+if elegir:
   cadenaBlanco=generarCadena(True, automata1,automata1.q_0)
   cadenaNegro=generarCadena(True, automata2, automata2.q_0)
 else:
   cadenaBlanco=generarCadena()
-  cadenaNegro=generarCadena()'''
+  cadenaNegro=generarCadena()
 
 def recalcularRuta(automata, estadoA, noTocar):
   print("Recualculando Ruta...")
   while 1:
     automata.camino.clear()
     if elegir:
-      nuevaRuta = generarCadena(True, automata, estadoA)
+      nuevaRuta = generarCadena(True, automata, estado)
       break
-    else:
-        nuevaRuta = generarCadena()
     if automata.pruebaRecursiva(nuevaRuta, estadoA):
       automata.camino.reverse()
       if automata.camino[0] != noTocar:
         print("La nueva ruta es: " + str(automata.camino))
         return
+
 recalcularRuta(automata1, automata1.q_0, automata2.q_0)
 print("El camino que tomara el blanco es: "+ str(automata1.camino))
+
 recalcularRuta(automata2, automata2.q_0, automata1.q_0)
 print("El camino que tomara el negro es: " + str(automata2.camino))
 
