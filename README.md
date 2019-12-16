@@ -11,7 +11,7 @@
 | Clase | Descipción |
 | ------ | ------ |
 |Autómata Finito Determinista|Generalización de un DFA el cual dibuja el grafo y puede hacer pruebas dentro del automáta|
-|2|Autómata Finito No Determinista|Generalización de un NFA el cual dibuja el grafo y puede hacer pruebas dentro del automáta|
+|Autómata Finito No Determinista|Generalización de un NFA el cual dibuja el grafo y puede hacer pruebas dentro del automáta|
 
 #### Tabla de practicas
 
