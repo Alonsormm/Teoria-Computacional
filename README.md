@@ -34,4 +34,7 @@
 
 ```sh
 python3-graphbiz
+IPython.display
+chess
+tkinter
 ```
