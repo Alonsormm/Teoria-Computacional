@@ -21,7 +21,7 @@
 |1|Generador de todas las combinaciones binarias de tamaño n, de tamaño 0 a n, y la graficación el numero de 1's por cadena|
 |2|Generador de números primos convirtiendolos en numeros binarios y contando el numero de 1's por cadena|
 |3|Generador de números binarios aleatorios los cuales a travez de un DFA se determina si son pares o no (El numero de 0's y el de 1's es par) simulando un protocolo de comunicacion|
-|4|Uso de un DFA para la detección de todas las palabras recervadas de ansiC en un código dado|
+|4|Uso de un DFA para la detección de todas las palabras reservadas de ansiC en un código dado|
 |5|Uso de un NFA para la identificacion de cadenas binarias cuya terminacion es '01'|
 |6|Uso de un NFA para la generacion de caminos en un tablero de ajedrez para que 2 reyes vayan de una esquina a otra en un tablero 3x3 con ilustraciones graficas y con recalculo de rutas si alguno de los 2 reyes interefiere en el camion del otro|
 |7|Generador de cadenas a partir de una expresión regular dada|
